@@ -20,7 +20,7 @@ import {
   export class ItemController {
     constructor(private readonly ItemsService: ItemsService) {}
   
-    // Create a new user with validation
+    // Create a new item with validation
     @Post()
     async createItem(@Body() itemDTO: CreateItemDTO): Promise<Items> {
       try {

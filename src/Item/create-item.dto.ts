@@ -12,7 +12,6 @@ export class CreateItemDTO {
     name: string;
 
     @IsNotEmpty()
-    @IsString()
     @IsNumber()
     @Min(0)
     Price: number;
