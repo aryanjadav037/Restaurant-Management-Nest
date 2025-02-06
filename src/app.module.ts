@@ -1,28 +1,35 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from './entities/user.entity';
-import { Items } from './entities/item.entity';
-import { Orders } from './entities/order.entity';
-import { Restaurants } from './entities/restaurant.entity';
-import { OrderItems } from './entities/orderitem.entity';
-import * as dotenv from 'dotenv';
 
-dotenv.config(); // Load .env variables
+import { Restaurants } from './entities/restaurant.entity';
+import { Users } from './entities/user.entity';
+import { Orders } from './entities/order.entity';
+import { Items } from './entities/item.entity';
+
+import { UsersModule } from './User/user.module'; 
+import { RestaurantsModule } from './Restaurant/restaurant.module';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { OrderItems } from './entities/orderitem.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE , // TypeORM expects a string type
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '5000'), // TypeORM expects a number port
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: '1234',
+      database: 'restaurant-ns',
+      entities: [Restaurants, Users, Orders, Items, OrderItems],
+      synchronize: true, // Set to false in production
     }),
-    TypeOrmModule.forFeature([Users, Items, Orders, Restaurants, OrderItems]),
+    UsersModule,
+    RestaurantsModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Min } from "class-validator";
+import { Min } from "@nestjs/class-validator";
 import { Orders } from "./order.entity";
 
 @Entity()

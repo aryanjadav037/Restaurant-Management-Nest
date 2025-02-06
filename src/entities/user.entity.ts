@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany ,OneToOne } from "typeorm";
-import { IsEmail } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from "typeorm";
+import { IsEmail } from "@nestjs/class-validator";
 import { Restaurants } from "./restaurant.entity";
 import { Orders } from "./order.entity";
-import { Images } from "../Image/image.entity";
 
 @Entity()
 export class Users {
@@ -13,7 +12,7 @@ export class Users {
     @Column("varchar", { length: 30 })
     name: string
 
-    @Column("varchar", { length: 10, unique: true })
+    @Column("varchar", { length: 10 , unique: true})
     mobileno: string
 
     @Column()
@@ -28,7 +27,4 @@ export class Users {
 
     @OneToMany(() => Orders, (orders) => orders.user)
     orders: Orders[]
-
-    @OneToOne(() => Images, (images) => images.user)
-    images: Images
 }
