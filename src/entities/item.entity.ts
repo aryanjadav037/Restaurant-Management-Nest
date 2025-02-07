@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne } from 'typeorm';
 import { Min } from '@nestjs/class-validator';
 import { Restaurants } from './restaurant.entity';
+import { Images } from './image.entity';
 
 @Entity()
 export class Items {
@@ -20,4 +21,7 @@ export class Items {
 
   @ManyToOne(() => Restaurants, (restaurant) => restaurant.items)
   restaurent: Restaurants;
+
+  @OneToOne(() => Images, (image) => image.item)
+  images: Images;
 }

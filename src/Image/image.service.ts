@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import * as AWS from 'aws-sdk';
 import { Injectable } from '@nestjs/common';
+import { Multer } from 'Multer';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Images } from './image.entity';
-import { Users } from '../entities/User';
-import { Order } from './entities/Order';
+import { Images } from '../entities/image.entity';
+import { Users } from '../entities/user.entity';
+import { Orders } from '../entities/order.entity';
 
 @Injectable()
 export class ImageService {
@@ -16,12 +17,12 @@ export class ImageService {
     });
 
     constructor(
-        @InjectRepository(Image) private readonly imageRepository: Repository<Image>,
-        @InjectRepository(User) private readonly userRepository: Repository<User>,
-        @InjectRepository(Order) private readonly orderRepository: Repository<Order>,
+        @InjectRepository(Images) private readonly imageRepository: Repository<Images>,
+        @InjectRepository(Users) private readonly userRepository: Repository<Users>,
+        @InjectRepository(Orders) private readonly orderRepository: Repository<Orders>,
     ) {}
-
-    async uploadUserImage(file: Express.Multer.File, userId: number): Promise<Image> {
+    async uploadUserImage(file: Multer.File, userId: number): Promise<Images> {
+    async uploadUserImage(file: Express.Multer.File, userId: number): Promise<Images> {
         const uploadResult = await this.s3.upload({
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: `users/${userId}/${Date.now()}-${file.originalname}`,
@@ -40,7 +41,7 @@ export class ImageService {
 
         return await this.imageRepository.save(image);
     }
-
+    async uploadOrderImage(file: Multer.File, orderId: number): Promise<Image> {
     async uploadOrderImage(file: Express.Multer.File, orderId: number): Promise<Image> {
         const uploadResult = await this.s3.upload({
             Bucket: process.env.AWS_S3_BUCKET_NAME,

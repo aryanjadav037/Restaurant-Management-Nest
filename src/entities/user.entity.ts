@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany , OneToOne} from "typeorm";
 import { IsEmail } from "@nestjs/class-validator";
 import { Restaurants } from "./restaurant.entity";
 import { Orders } from "./order.entity";
+import { Images } from "./image.entity";
 
 @Entity()
 export class Users {
@@ -27,4 +28,7 @@ export class Users {
 
     @OneToMany(() => Orders, (orders) => orders.user)
     orders: Orders[]
+
+    @OneToOne(() => Images, (image) => image.user)
+    images: Images
 }

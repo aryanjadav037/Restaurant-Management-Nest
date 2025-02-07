@@ -16,13 +16,13 @@ export class Images {
     filename?: string; // Original filename (optional)
 
     @OneToOne(() => Users, (user) => user.images, { onDelete: "CASCADE" })
-    user?: Users; // Optional relation to User
+    user: Users; 
 
     @OneToOne(() => Restaurants, (restaurant) => restaurant.images, { onDelete: "CASCADE" })
-    restaurant?: Restaurants; // Optional relation to Restaurant
+    restaurant: Restaurants; 
 
     @OneToOne(() => Items, (item) => item.images, { onDelete: "CASCADE" })
-    item?: Items; // Optional relation to Item
+    item: Items; 
 
     @CreateDateColumn()
     createdAt: Date;

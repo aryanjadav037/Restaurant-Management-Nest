@@ -26,7 +26,7 @@ export class UsersController {
     try {
       return await this.usersService.createUser(userDTO);
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new BadRequestException(error);
     }
   }
 
@@ -55,7 +55,7 @@ export class UsersController {
     try {
       return await this.usersService.updateUser(id, userDTO);
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new BadRequestException(error);
     }
   }
 
@@ -66,7 +66,7 @@ export class UsersController {
       await this.usersService.deleteUser(id);
       return { message: `User with ID ${id} deleted successfully` };
     } catch (error) {
-      throw new NotFoundException(error.message);
+      throw new NotFoundException(error);
     }
   }
 }
