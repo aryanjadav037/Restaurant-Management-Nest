@@ -25,8 +25,8 @@ import { AppService } from './app.service';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1234',
-      database: 'restaurant-ns',
+      password: '123456',
+      database: 'restaurant',
       entities: [Restaurants, Users, Orders, Items, OrderItems,OrdersModule],
       synchronize: true, // Set to false in production
     }),

@@ -4,13 +4,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
-  ManyToMany,
-  OneToOne
+  ManyToMany
 } from "typeorm";
 import { Items } from "./item.entity";
 import { Users } from "./user.entity";
 import { Orders } from "./order.entity";
-import { Images } from "./image.entity";
+
 
 @Entity()
 export class Restaurants {
@@ -35,7 +34,6 @@ export class Restaurants {
   @OneToMany(() => Orders, (orders) => orders.restaurant)
   orders: Orders[];
 
-  @OneToOne(() => Images, (image) => image.restaurant)
-  images: Images;
+  
 
 }

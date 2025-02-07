@@ -12,7 +12,7 @@ import {
     BadRequestException 
   } from '@nestjs/common';
   import { ItemsService } from './item.service'  // Import User service
-  import { CreateItemDTO } from './create-item.dto';  // DTO with validations
+  import { CreateItemDTO } from './create-item.dto'  // DTO with validations
   import { UpdateItemDTO } from './update-item.dot'  // DTO with validations
   import { Items } from '../entities/item.entity';
   

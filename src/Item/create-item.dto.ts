@@ -1,33 +1,28 @@
 /* eslint-disable prettier/prettier */
-import {  IsCurrency, Max, IsDate, IsEnum, IsArray, ArrayNotEmpty, IsUUID, IsNotEmpty} from '@nestjs/class-validator';
-import { OrderStatus } from '../entities/order.entity'; 
+import {
+  IsString, IsNumber, Min
+  , IsUUID, IsNotEmpty, Length
+} from '@nestjs/class-validator';
+// import { IsOptional } from '@nestjs/class-validator'; 
 
-export class CreateOrderDTO {
+export class CreateItemDTO {
+  @IsNotEmpty()
+  @IsString()
+  @Length(3, 30, { message: 'Name must be between 3 and 30 characters' })
+  name: string;
 
   @IsNotEmpty()
-  @IsCurrency()
-  @Max(999999, { message: 'Amount must be less than 1000' })
-  amount: number;
+  @IsNumber()
+  @Min(0, { message: 'Price must be greater than 0' })
+  Price: number;
 
   @IsNotEmpty()
-  @IsDate()
-  orderdate: Date;
+  @IsString()
+  @Length(5, 100, { message: 'Description must be between 5 and 100 characters' })
+  description: string;
 
   @IsNotEmpty()
-  @IsEnum(OrderStatus, { message: 'Status must be either pending, completed, or cancelled' })
-  status: OrderStatus;
-
-  @IsNotEmpty()
-  @IsUUID('4', { message: 'Restaurant ID must be a valid UUID' })
+  @IsUUID('4', { message: 'Each item ID must be a valid UUID' })
   restaurantId: string; // For restaurantId, if it's just an ID reference
-
-  @IsNotEmpty()
-  @IsUUID('4', { each: true, message: 'Each user ID must be a valid UUID' })
-  userId: string; // Order IDs as UUID array
-
-  @IsArray()
-  @ArrayNotEmpty()
-  @IsUUID('4', { each: true, message: 'Each Orderitem ID must be a valid UUID' })
-  orderitemIds: string[]; // Orderitem IDs as UUID array
 
 }
